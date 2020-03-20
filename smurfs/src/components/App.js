@@ -1,16 +1,52 @@
-import React, { Component } from "react";
+import React, {useState, useEffect} from 'react';
+import axios from "axios"
 import "./App.css";
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <h1>SMURFS! 2.0 W/ Redux</h1>
-        <div>Welcome to your state management version of Smurfs!</div>
-        <div>Start inside of your `src/index.js` file!</div>
-        <div>Have fun!</div>
-      </div>
-    );
-  }
+import {Container, Header, Divider} from 'semantic-ui-react'
+
+
+
+//Components
+import Smurfs from './Smurfs'
+import Formx from './Form'
+//Context
+import TheContexts from '../contexts/TheContext'
+
+let url = "http://localhost:3333/smurfs"
+
+const App = () => {
+const [smurfs, setSmurfs] = useState([])
+
+useEffect(() => {
+  axios
+  .get(url)
+  .then(res => {
+    console.log("D A T A: ", res.data)
+    setSmurfs(res.data) //forgot this too... ugh! all good now though.
+  })
+  .catch(err=> {
+    console.log("E R R O R: ", err)
+  })
+},[])
+
+  return(
+   
+    <Container textAlign="center">
+      <Header>Smurf 3.0 W/ Context</Header>
+      <p>Smurfs are blue...right?</p>
+      <Divider>
+  <TheContexts.Provider value={{smurfs, setSmurfs}}>
+<Smurfs/>
+<Formx/> 
+  </TheContexts.Provider>
+
+      </Divider>
+      <Divider>
+
+    </Divider>
+    </Container>
+ 
+   
+  )
 }
 
 export default App;
