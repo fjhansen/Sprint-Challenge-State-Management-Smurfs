@@ -1,15 +1,26 @@
 import React, {useContext} from "react"
-import {TheContext} from "../contexts/TheContext" 
+import TheContexts from '../contexts/TheContext'
 
 import {Container, Segment, Header, Divider, Grid, Icon, Image, Card} from 'semantic-ui-react'
 
 const Smurfs = () => {
-  const smurfs = useContext(TheContext);
+  const smurfs = useContext(TheContexts);
   console.log("IN SMURFS.JS: ", smurfs)
   return(
     <Container>
-      <p>Placeholder!</p>
-      
+      <Card.Group>
+      {smurfs.map(smurf => {
+        return(
+          <Card>
+            <Card.Content>
+              <Card.Header>{smurf.name}</Card.Header>
+              <Card.Meta>Age: {smurf.age}</Card.Meta>
+              <Card.Description>{smurf.height}</Card.Description>
+            </Card.Content>
+          </Card>
+        )
+      })} 
+      </Card.Group>
     </Container>
   )
 }

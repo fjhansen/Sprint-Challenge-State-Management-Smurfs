@@ -3,12 +3,13 @@ import axios from "axios"
 import "./App.css";
 import {Container, Header, Divider} from 'semantic-ui-react'
 
-//Context
-import {TheContext} from '../contexts/TheContext'
+
 
 //Components
 import Smurfs from './Smurfs'
 import Formx from './Form'
+//Context
+import TheContexts from '../contexts/TheContext'
 
 let url = "http://localhost:3333/smurfs"
 
@@ -20,24 +21,28 @@ useEffect(() => {
   .get(url)
   .then(res => {
     console.log("D A T A: ", res.data)
+    setSmurfs(res.data) //forgot this too... ugh! all good now though.
   })
   // .catch(err=> {})
 },[])
 
   return(
-    <TheContext.Provider value={smurfs}>
+   
     <Container textAlign="center">
       <Header>Smurf 3.0 W/ Context</Header>
       <p>Smurfs are blue...right?</p>
       <Divider>
- 
-        <Smurfs/>
+  <TheContexts.Provider value={smurfs}>
+<Smurfs/>
+<Formx/> 
+  </TheContexts.Provider>
+
       </Divider>
       <Divider>
-    <Formx/> 
+
     </Divider>
     </Container>
-    </TheContext.Provider>
+ 
    
   )
 }

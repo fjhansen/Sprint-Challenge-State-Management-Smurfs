@@ -1,3 +1,4 @@
 import { createContext } from 'react'
-///
-export const TheContext = createContext();
+const TheContexts = createContext();
+//i forgot this, duh!!!!
+export default TheContexts
