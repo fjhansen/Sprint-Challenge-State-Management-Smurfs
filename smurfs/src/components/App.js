@@ -23,7 +23,9 @@ useEffect(() => {
     console.log("D A T A: ", res.data)
     setSmurfs(res.data) //forgot this too... ugh! all good now though.
   })
-  // .catch(err=> {})
+  .catch(err=> {
+    console.log("E R R O R: ", err)
+  })
 },[])
 
   return(
@@ -32,7 +34,7 @@ useEffect(() => {
       <Header>Smurf 3.0 W/ Context</Header>
       <p>Smurfs are blue...right?</p>
       <Divider>
-  <TheContexts.Provider value={smurfs}>
+  <TheContexts.Provider value={{smurfs, setSmurfs}}>
 <Smurfs/>
 <Formx/> 
   </TheContexts.Provider>
