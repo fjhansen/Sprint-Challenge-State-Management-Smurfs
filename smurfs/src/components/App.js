@@ -9,7 +9,19 @@ import Formx from './Form'
 
 import "./App.css";
 
+let url = "http://localhost:3333/smurfs"
+
 const App = () => {
+const [smurfs, setSmurfs] = useState([])
+
+useEffect(() => {
+  axios
+  .get(url)
+  .then(res => {
+    console.log("D A T A: ", res.data)
+  })
+})
+
   return(
     <Container textAlign="center">
       <Header>Smurf 3.0 W/ Context</Header>
